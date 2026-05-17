@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Custom scrollbar ─────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0f172a; }
+::-webkit-scrollbar-thumb { background: #1e40af; border-radius: 3px; }
+
+/* ─── Glassmorphism utility ─────────────────────────────── */
+@layer components {
+  .glass {
+    @apply backdrop-blur-md bg-white/5 border border-white/10;
+  }
+  .glass-dark {
+    @apply backdrop-blur-md bg-black/40 border border-white/10;
+  }
+  .neon-text {
+    text-shadow: 0 0 20px rgba(0,179,220,0.8), 0 0 40px rgba(0,179,220,0.4);
+  }
+  .neon-text-amber {
+    text-shadow: 0 0 20px rgba(245,158,11,0.8), 0 0 40px rgba(245,158,11,0.4);
+  }
+  .neon-border {
+    box-shadow: 0 0 0 1px rgba(0,179,220,0.5), 0 0 20px rgba(0,179,220,0.2);
+  }
+  .grid-bg {
+    background-image:
+      linear-gradient(rgba(0,179,220,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,179,220,0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .dot-bg {
+    background-image: radial-gradient(rgba(0,179,220,0.15) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+}
+
+/* ─── Leaflet map dark overrides ────────────────────────── */
+.leaflet-container {
+  background: #0a1628 !important;
+  font-family: 'DM Sans', sans-serif !important;
+}
+.leaflet-popup-content-wrapper {
+  background: rgba(6,30,66,0.95) !important;
+  border: 1px solid rgba(0,179,220,0.3) !important;
+  color: #e2e8f0 !important;
+  border-radius: 12px !important;
+  backdrop-filter: blur(10px);
+}
+.leaflet-popup-tip { background: rgba(6,30,66,0.95) !important; }
+.leaflet-control-zoom a {
+  background: rgba(6,30,66,0.9) !important;
+  color: #00b3dc !important;
+  border-color: rgba(0,179,220,0.3) !important;
+}
+
+/* ─── Bus marker pulse ring ─────────────────────────────── */
+@keyframes busRing {
+  0%   { transform: scale(1);   opacity: 0.8; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+.bus-pulse-ring {
+  animation: busRing 1.5s ease-out infinite;
+}
+
+/* ─── LED display font ──────────────────────────────────── */
+.led { font-family: 'Share Tech Mono', monospace; }
+
+/* ─── Scanline overlay ──────────────────────────────────── */
+.scanlines::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.05) 2px,
+    rgba(0,0,0,0.05) 4px
+  );
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* ─── Animated gradient border ──────────────────────────── */
+@keyframes borderGlow {
+  0%, 100% { border-color: rgba(0,179,220,0.5); }
+  50%       { border-color: rgba(99,226,255,0.9); }
+}
+.glow-border { animation: borderGlow 2s ease-in-out infinite; }
+
+/* ─── Number counter animation ──────────────────────────── */
+@keyframes countUp {
+  from { transform: translateY(100%); opacity: 0; }
+  to   { transform: translateY(0);   opacity: 1; }
+}
+.count-up { animation: countUp 0.4s ease-out; }
+
+/* ─── Hero particle canvas ──────────────────────────────── */
+#particle-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.4;
+}
